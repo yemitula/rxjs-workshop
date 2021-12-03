@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService, School} from 'src/app/services/api.service';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import {ApiService, Course, School} from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -7,6 +9,13 @@ import {ApiService, School} from 'src/app/services/api.service';
   styleUrls: ['./courses-page.component.scss']
 })
 export class CoursesPageComponent implements OnInit {
+
+  courses$: Observable<Course[]> = this.api.courses().pipe(
+    shareReplay(),
+  );
+  courseCount$: Observable<number> = this.courses$.pipe(
+    map((courses: Course[]) => courses.length)
+  )
 
   constructor(private api: ApiService) {
   }

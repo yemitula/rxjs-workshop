@@ -34,15 +34,14 @@
       <div class="col-12 text-right">
 
         <!-- TODO: Display the number of courses here -->
-        <p>2 Courses</p>
+        <p>{{courseCount$ | async}} Courses</p>
 
       </div>
       <div class="col-12">
         <ul class="list-group">
 
           <!-- TODO: Display the list of available courses here -->
-          <li class="list-group-item">CSC108: Intro to Computer Science</li>
-          <li class="list-group-item">CSC148: Intermediate Computer Science</li>
+          <li class="list-group-item" *ngFor="let course of (courses$ | async)">{{course.fullName}}</li>
 
         </ul>
       </div>
